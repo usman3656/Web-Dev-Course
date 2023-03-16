@@ -1,7 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
-const User = require("../user/model");
+const User = require("../user/model/model");
 
 const authorize = (req, res, next) => {
   const token = req.cookies.access_token;
