@@ -2,29 +2,26 @@ const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-  first_name:{
+  username:{
     type: String,
     require: true,
-  },
-  last_name: {
-    type: String,
-    require: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
+    unique: true
   },
   password: {
     type: String,
     required: true,
   },
-  age:{
-    type: Number,
-    require: true,
+  roleID:{
+    type: mongoose.Types.ObjectId,
+    ref: "Roles",
+    required: true,
   },
-},
-// { timestamps: true }
+  userStatusID:{
+    type: mongoose.Types.ObjectId,
+    ref:"UserStatus",
+    required:true
+  }
+}
 );
 
 userSchema.pre('save', function(next){
@@ -32,6 +29,6 @@ userSchema.pre('save', function(next){
   next();
 })
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("Users", userSchema);
 
 module.exports = User;
